@@ -79,7 +79,7 @@ static void readTrainingData()
 {
     FileInputStream fis = null;
     try {
-        fis = new FileInputStream("/Users/gmadkat/tutor/ayesha/diabetestraining.csv");
+        fis = new FileInputStream("/Users/ayeshabaigplus3it/Documents/GitHub/diabetesdata/data/diabetestest.csv");
     } catch (FileNotFoundException e) {
         System.out.println(e.getLocalizedMessage());
     }
