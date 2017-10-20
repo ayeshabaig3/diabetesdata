@@ -43,6 +43,11 @@ class HospitalRecord(object):
         self.distance += (self.admission_type_id - other.admission_type_id) **2
         self.distance += (self.time_in_hospital - other.time_in_hospital) ** 2
 
+    def __str__(self):
+        return "%f %d %d %d %d %d %s" % (
+        self.distance, self.gender, self.age, self.admission_type_id, self.discharge_disposition_id,
+        self.time_in_hospital, self.readmitted)
+
 def read_data(filename):
 
     f = open(filename, "r")
@@ -53,5 +58,19 @@ def read_data(filename):
     print "Read %d records from file %s" %(len(patients),filename)
     return patients
 
-training_data =read_data("/Users/ayeshabaigplus3it/Documents/GitHub/diabetesdata/data/training.csv")
+
+
+def traindata(training_data,testing_data ):
+    matchedcounttotal = 0
+    matchedcounttotalyesno = 0
+    for test_record in testing_data:
+        for training_record in training_data:
+
+            training_record.set_distance(test_record)
+        training_data.sort(key=lambda x:x.distance)
+        print test_record
+
+training_data = read_data("/Users/ayeshabaigplus3it/Documents/GitHub/diabetesdata/data/training.csv")
+testing_data = read_data("/Users/ayeshabaigplus3it/Documents/GitHub/diabetesdata/data/testing.csv")
+traindata(training_data, testing_data)  
 
