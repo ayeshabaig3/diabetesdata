@@ -63,14 +63,37 @@ def read_data(filename):
 def traindata(training_data,testing_data ):
     matchedcounttotal = 0
     matchedcounttotalyesno = 0
-    for test_record in testing_data:
-        for training_record in training_data:
+    for training_1 in training_data:
+        for training_2 in training_data:
 
-            training_record.set_distance(test_record)
+            training_1.set_distance(training_2)
         training_data.sort(key=lambda x:x.distance)
-        print test_record
+        print ("Patient test: %s" % training_1)
+
+        no_admit_count = 0
+        less_30count = 0
+        greater_30 = 0
+
+        most_frequent_policy = "NO"
+        most_frequent_policy_yes_no = "NO"
+
+        for j in training_data[:15]:
+            if j.readmitted == "NO":
+                no_admit_count += 1
+            if j.readmitted == "<30":
+                less_30count += 1
+            if j.readmitted == "<30":
+                greater_30 += 1
+         if (less_30count >= no_admit_count) and (less_30count >= greater_30):
+             most_frequent_policy = "<30"
+
+
+
+
 
 training_data = read_data("/Users/ayeshabaigplus3it/Documents/GitHub/diabetesdata/data/training.csv")
 testing_data = read_data("/Users/ayeshabaigplus3it/Documents/GitHub/diabetesdata/data/testing.csv")
-traindata(training_data, testing_data)  
+traindata(training_data, testing_data)
+
+
 
